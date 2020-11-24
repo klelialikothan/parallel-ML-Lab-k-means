@@ -2,9 +2,9 @@
 #include "stdlib.h"
 
 #define N 10
-#define Nv 2
+#define Nv 3
 #define Nc 2
-#define THR_KMEANS 0.001
+#define THR_KMEANS 0.001f
 
 // Define vector and center arrays as global
 float Vec[N][Nv];
@@ -23,7 +23,7 @@ void euclidean_dist(void){}
 // (Re)assignment of a cluster to each vector
 void assign_clusters(void){}
 
-// Calculation of cluster means after (re)assignment
+// Calculation of new cluster means after (re)assignment
 void update_centers(void){}
 
 // Main function

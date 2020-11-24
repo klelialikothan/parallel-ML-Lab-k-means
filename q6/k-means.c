@@ -9,6 +9,9 @@
 #define Nc 100
 #define THR_KMEANS 0.000001f
 
+#pragma GCC optimize("O3","unroll-loops","omit-frame-pointer","inline", "unsafe-math-optimizations")
+#pragma GCC option("arch=native","tune=native","no-zero-upper")
+
 // Define vector and center arrays as global
 float Vec[N][Nv];
 float Center[Nc][Nv];
@@ -73,7 +76,6 @@ void init_centers(void){
 void assign_clusters(void){
 
     // max distance: (255.0 - (-255.0))^2 foreach of the Nv dimensions
-    // float max_dist = sqrtf(Nv * 510.0 * 510.0);
     float max_dist = Nv * 510.0 * 510.0;
     float min_dist, diff, temp_dist;
     int center_idx;
@@ -88,13 +90,11 @@ void assign_clusters(void){
                 diff = Center[j][k] - Vec[i][k];
                 temp_dist += diff * diff;  // pow is slower
             }
-//            temp_dist = sqrtf(temp_dist);
             if (temp_dist < min_dist){  // better fit found
                 min_dist = temp_dist;
                 center_idx = j;
             }
         }
-//        curr_dist_sum += min_dist;
         curr_dist_sum += sqrtf(min_dist);
         Classes[i] = center_idx;  // assign centre to vector
     }

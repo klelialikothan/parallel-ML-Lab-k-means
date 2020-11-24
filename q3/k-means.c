@@ -90,7 +90,6 @@ void assign_clusters(void){
             temp_dist = sqrtf(temp_dist);
             if (temp_dist < min_dist){  // better fit found
                 min_dist = temp_dist;
-                // printf("%f ", temp_dist);
                 center_idx = j;
             }
         }
@@ -130,6 +129,7 @@ int main (void){
 
     printf("N = %d | Nv = %d | Nc = %d\n", N, Nv, Nc);
 
+    printf("Chosen vectors:\n");
     for (int i=0; i<N; i++){
         printf("Vec[%d] -> { %f", i, Vec[i][0]);
         for (int j=1; j<Nv; j++){
@@ -138,6 +138,7 @@ int main (void){
         printf(" }\n");
     }
 
+    printf("Chosen centres:\n");
     for (int i=0; i<Nc; i++){
         printf("C[%d] -> ", i);
         for (int j=0; j<Nv; j++){
@@ -147,33 +148,23 @@ int main (void){
     }
 
     assign_clusters();
-
-    for (int i=0; i<N; i++){
-        printf("Vec[%d] -> C[%d]\n", i, Classes[i]);
-    }
-
     update_centers();
-
-    for (int i=0; i<Nc; i++){
-        printf("C[%d] -> ", i);
-        for (int j=0; j<Nv; j++){
-            printf(" %f", Center[i][j]);
-        }
-        printf("\n");
-    }
 
     prev_dist_sum = 0.0f;
     int count=1;
-    while (curr_dist_sum - prev_dist_sum >= THR_KMEANS){
+    while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();
         count++;
     }
 
+    printf("Final cluster assignment:\n");
     for (int i=0; i<N; i++){
         printf("Vec[%d] -> C[%d]\n", i, Classes[i]);
     }
+
+    printf("Final centre coordinates:\n");
     for (int i=0; i<Nc; i++){
         printf("C[%d] -> ", i);
         for (int j=0; j<Nv; j++){
@@ -181,7 +172,8 @@ int main (void){
         }
         printf("\n");
     }
-    printf("%d times total\n", count);
+
+    printf("Total iterations: %d\n", count);
 
     return 0;
 

@@ -1,3 +1,8 @@
 # parallel-ML-Lab-k-means
 
-Parallel Programming in ML - Software & Programming of High Perfomance Systems, Lab 1
+Lab Exercise 1 of courses Parallel Programming in ML (ECE) - Software & Programming of High Perfomance Systems (CEID), 
+academic year 2020-2021.
+
+Efficient implementation of k-means clustering algorithm in C.
+
+

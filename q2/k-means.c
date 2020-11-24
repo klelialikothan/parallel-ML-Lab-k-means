@@ -6,13 +6,8 @@
 
 #define N 10
 #define Nv 3
-#define Nc 4
+#define Nc 2
 #define THR_KMEANS 0.001f
-
-//#define N 100000
-//#define Nv 1000
-//#define Nc 100
-//#define THR_KMEANS 0.000001
 
 // Define vector and center arrays as global
 float Vec[N][Nv];
@@ -87,7 +82,8 @@ void assign_clusters(void){
         min_dist = max_dist;
         for (int j=0; j<Nc; j++){  // foreach centre
             temp_dist = 0.0f;
-            for (int k=0; k<Nv; k++){  // calculate euclidean distance
+            // calculate euclidean distance
+            for (int k=0; k<Nv; k++){
                 diff = Center[j][k] - Vec[i][k];
                 temp_dist += diff * diff;  // pow is slower
             }
@@ -135,6 +131,7 @@ int main (void){
 
     init_vectors();
 
+    printf("Randomly generated vectors:\n");
     for (int i=0; i<N; i++){
         printf("Vec[%d] -> { %f", i, Vec[i][0]);
         for (int j=1; j<Nv; j++){
@@ -145,6 +142,7 @@ int main (void){
 
     init_centers();
 
+    printf("Randomly chosen centres:\n");
     for (int i=0; i<Nc; i++){
         printf("C[%d] -> ", i);
         for (int j=0; j<Nv; j++){
@@ -154,33 +152,23 @@ int main (void){
     }
 
     assign_clusters();
-
-    for (int i=0; i<N; i++){
-        printf("Vec[%d] -> C[%d]\n", i, Classes[i]);
-    }
-
     update_centers();
 
-    for (int i=0; i<Nc; i++){
-        printf("C[%d] -> ", i);
-        for (int j=0; j<Nv; j++){
-            printf(" %f", Center[i][j]);
-        }
-        printf("\n");
-    }
-
     prev_dist_sum = 0.0f;
-    int count=1;
-    while (curr_dist_sum - prev_dist_sum >= THR_KMEANS){
+    int count = 1;
+    while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();
         count++;
     }
 
+    printf("Final cluster assignment:\n");
     for (int i=0; i<N; i++){
         printf("Vec[%d] -> C[%d]\n", i, Classes[i]);
     }
+
+    printf("Final centre coordinates:\n");
     for (int i=0; i<Nc; i++){
         printf("C[%d] -> ", i);
         for (int j=0; j<Nv; j++){
@@ -188,7 +176,8 @@ int main (void){
         }
         printf("\n");
     }
-    printf("%d times total\n", count);
+
+    printf("Total iterations: %d\n", count);
 
     return 0;
 
