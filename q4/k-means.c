@@ -7,7 +7,7 @@
 #define N 100000
 #define Nv 1000
 #define Nc 100
-#define THR_KMEANS 0.000001
+#define THR_KMEANS 0.000001f
 
 // Define vector and center arrays as global
 float Vec[N][Nv];
@@ -82,17 +82,19 @@ void assign_clusters(void){
         min_dist = max_dist;
         for (int j=0; j<Nc; j++){  // foreach centre
             temp_dist = 0.0f;
-            for (int k=0; k<Nv; k++){  // calculate euclidean distance
+            // calculate euclidean distance
+            for (int k=0; k<Nv; k++){
                 diff = Center[j][k] - Vec[i][k];
                 temp_dist += diff * diff;  // pow is slower
             }
-            temp_dist = sqrtf(temp_dist);
+//            temp_dist = sqrtf(temp_dist);
             if (temp_dist < min_dist){  // better fit found
                 min_dist = temp_dist;
                 center_idx = j;
             }
         }
-        curr_dist_sum += min_dist;
+//        curr_dist_sum += min_dist;
+        curr_dist_sum += sqrtf(min_dist);
         Classes[i] = center_idx;  // assign centre to vector
     }
 
@@ -165,8 +167,8 @@ int main (void){
 //    }
 
     prev_dist_sum = 0.0f;
-    int count=1;
-    while (curr_dist_sum - prev_dist_sum >= 0.00001f){
+    int count = 1;
+    while (fabsf(curr_dist_sum - prev_dist_sum) >= THR_KMEANS){
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();

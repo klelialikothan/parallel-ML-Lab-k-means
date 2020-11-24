@@ -7,7 +7,7 @@
 #define N 10
 #define Nv 3
 #define Nc 4
-#define THR_KMEANS 0.001
+#define THR_KMEANS 0.001f
 
 //#define N 100000
 //#define Nv 1000
@@ -171,7 +171,7 @@ int main (void){
 
     prev_dist_sum = 0.0f;
     int count=1;
-    while (curr_dist_sum - prev_dist_sum >= 0.00001f){
+    while (curr_dist_sum - prev_dist_sum >= THR_KMEANS){
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();

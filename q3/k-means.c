@@ -7,7 +7,7 @@
 #define N 8
 #define Nv 2
 #define Nc 2
-#define THR_KMEANS 0.001
+#define THR_KMEANS 0.001f
 
 // Define vector and center arrays as global
 float Vec[N][Nv] = { {2.0f, 6.0f}, {2.0f, 10.0f}, {4.0f, 4.0f}, {4.0f, 8.0f},
@@ -164,7 +164,7 @@ int main (void){
 
     prev_dist_sum = 0.0f;
     int count=1;
-    while (curr_dist_sum - prev_dist_sum >= 0.00001f){
+    while (curr_dist_sum - prev_dist_sum >= THR_KMEANS){
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();
