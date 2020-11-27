@@ -103,7 +103,6 @@ void assign_clusters(void){
 void update_centers(void){
 
     memset(Observations, 0, Nc * sizeof(int));  // number of vectors in each cluster
-    // TODO: change center memset to for & explain in report
     memset(Center, 0, Nc * Nv * sizeof(float));  // set all centres to origin
     for (int i=0; i<N; i++){  // foreach vector
         for (int j=0; j<Nv; j++){  // foreach dimension

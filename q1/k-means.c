@@ -18,7 +18,7 @@ void init_vectors(void){}
 void init_centers(void){}
 
 // Helper function that calculates Euclidean distance between two given vectors
-void euclidean_dist(void){}
+void euclidean_dist(int vec_idx, int center_idx){}
 
 // (Re)assignment of a cluster to each vector
 void assign_clusters(void){}
@@ -27,7 +27,7 @@ void assign_clusters(void){}
 void update_centers(void){}
 
 // Main function
-int main (void){
+int main(void){
 
     return 0;
 

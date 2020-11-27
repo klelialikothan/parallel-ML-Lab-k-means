@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)  # CMake version check
 project(parallel-ML-Lab-k-means)      # Create project "parallel-ML-Lab-k-means"
-set(CMAKE_C_STANDARD 11)              # Enable c11 standard
+set(CMAKE_C_STANDARD 11)              # Enable c11 standard (CLion & Cmake constraint)
 
 # Add appropriate k-means.c file of project root directory as source file
 #set(SOURCE_FILES ./q1/k-means.c)

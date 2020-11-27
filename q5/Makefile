@@ -3,7 +3,7 @@ src = $(wildcard *.c)
 obj = $(src:/c=.o)
 
 CC = gcc
-CFLAGS = -std=c17 -O2
+CFLAGS = -std=c17 -O2 -fopt-info-all
 LIBFLAGS = -lm
 
 compile: $(name)

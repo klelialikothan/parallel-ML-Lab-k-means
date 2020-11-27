@@ -105,7 +105,6 @@ void assign_clusters(void){
 void update_centers(void){
 
     memset(Observations, 0, Nc * sizeof(int));  // number of vectors in each cluster
-    // TODO: change center memset to for & explain in report
     memset(Center, 0, Nc * Nv * sizeof(float));  // set all centres to origin
     for (int i=0; i<N; i++){  // foreach vector
         for (int j=0; j<Nv; j++){  // foreach dimension
@@ -138,7 +137,8 @@ int main (void){
 
     prev_dist_sum = 0.0f;
     int count = 1;
-    while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
+    // while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
+    while (count <= 15){  // benchmarking
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();
