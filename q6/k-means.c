@@ -137,8 +137,8 @@ int main (void){
 
     prev_dist_sum = 0.0f;
     int count = 1;
-    // while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
-    while (count <= 15){  // benchmarking
+    while (fabsf(curr_dist_sum - prev_dist_sum)/prev_dist_sum >= THR_KMEANS){
+    // while (count <= 15){  // benchmarking
         prev_dist_sum = curr_dist_sum;
         assign_clusters();
         update_centers();
